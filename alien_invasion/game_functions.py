@@ -70,7 +70,7 @@ def check_keyup_events(event,ship):
     elif event.key == pygame.K_DOWN:
         ship.moving_down = False
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     # Redraw the screen during each pass through the loop
     screen.fill(ai_settings.bg_color)
     # Redraw all bullets behind ship and aliens
@@ -79,6 +79,9 @@ def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button
     ship.blitme()
     aliens.draw(screen)
 
+    # Draw the score information
+    sb.show_score()
+    
     # Draw the play button if the game is inactive
     if not stats.game_active:
         play_button.draw_button()
