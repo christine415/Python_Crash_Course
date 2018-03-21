@@ -8,6 +8,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     '''Respond the keyboard and mouse events'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            save_highscore(stats)
             sys.exit()
         
         elif event.type == pygame.KEYDOWN:
@@ -63,7 +64,12 @@ def check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bu
     elif event.key == pygame.K_p and not stats.game_active:
         start_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
     elif event.key == pygame.K_q:
+        save_highscore(stats)
         sys.exit()
+
+def save_highscore(stats):
+    with open("high_score.txt", 'w') as f:
+        f.write(str(stats.high_score))
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     # Create a new bullet and add it to the bullet group

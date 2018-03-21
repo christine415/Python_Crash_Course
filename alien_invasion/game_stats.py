@@ -1,3 +1,5 @@
+import os 
+
 class GameStats():
     '''Track statistics for Alien Invasion'''
     def __init__(self, ai_settings):
@@ -6,7 +8,12 @@ class GameStats():
         # Start Alien Invasion in an active state
         self.game_active = False
         # High score should never be reset
-        self.high_score = 0
+        if os.path.exists("high_score.txt"):
+            with open("high_score.txt") as f:
+                self.high_score = int(f.readline())
+        else:
+            self.high_score = 0
+        
 
     def reset_stats(self):
         self.ships_left = self.ai_settings.ship_limit
